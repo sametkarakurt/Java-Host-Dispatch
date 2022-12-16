@@ -11,12 +11,13 @@ public class Main {
         Queue priorty1 = new Queue();
         Queue priorty2 = new Queue();
         Queue priorty3 = new Queue();
-       
 
-        ArrayList<Process> nodeArr = fileRead.readFile("C:\\Users\\samet\\IdeaProjects\\Operating-System\\src\\Deneme.txt");
+        MyProcess askıdakiProcess = new MyProcess(-1,0,0,0);
+
+        ArrayList<MyProcess> nodeArr = fileRead.readFile("C:\\Users\\samet\\IdeaProjects\\Operating-System\\src\\Deneme.txt");
         int totalProcess = nodeArr.size();
         nodeArr.sort((node1, node2) -> node1.arrivalTime - node2.arrivalTime);
-        System.out.println(nodeArr);
+
         int counter = 0;
         while (true){
             for (int i = 0; i < nodeArr.size() && nodeArr.get(i).arrivalTime <= counter  ; i++) {
@@ -40,56 +41,82 @@ public class Main {
 
 
                     }
-
-
-
-
                 }
 
             }
 
             if(realTime.head != null){
-                realTime.head.process.burnTime --;
-                if(realTime.head.process.burnTime == 0){
+                Node temp =  realTime.head;
+                if(askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1){
+                    System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
+                }
+
+                temp.myProcess.run();
+                if (temp.myProcess.burnTime == 0) {
                     realTime.pop();
                     totalProcess--;
+                    System.out.println("Process" + temp.myProcess.processId + " sonlandı");
+                    askıdakiProcess.processId = -1;
+                }else{
+                    askıdakiProcess = temp.myProcess;
                 }
+
+
 
             } else if(priorty1.head != null){
 
-               Node temp = priorty1.head;
+                Node temp = priorty1.head;
+                if(askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1){
+                    System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
+                }
+                temp.myProcess.run();
 
 
-               temp.process.burnTime --;
-               if(temp.process.burnTime == 0){
-
-                   totalProcess--;
-               } else {
-
-                   priorty1.push(temp.process);
-               }
-                priorty1.pop();
+                if (temp.myProcess.burnTime == 0) {
+                    priorty1.pop();
+                    totalProcess--;
+                    System.out.println("Process" + temp.myProcess.processId + " sonlandı");
+                    askıdakiProcess.processId = -1;
+                }else{
+                    askıdakiProcess = temp.myProcess;
+                }
 
 
             } else if(priorty2.head != null){
 
                 Node temp = priorty2.head;
-               /* do{
-                    temp.process.burnTime --;
-                    if(temp.process.burnTime == 0){
-                        priorty1.pop();
-
-                    }else {
-                        priorty1.push(temp.process);
-                    }
-
-                    temp = temp.next;
-                }while (temp.next != null);
-                */
+                if(askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1){
+                    System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
+                }
+                temp.myProcess.run();
 
 
+                if (temp.myProcess.burnTime == 0) {
+                    priorty2.pop();
+                    totalProcess--;
+                    System.out.println("Process" + temp.myProcess.processId + " sonlandı");
+                    askıdakiProcess.processId = -1;
+                }else{
+                    askıdakiProcess = temp.myProcess;
+                }
 
-        }
+        }else if (priorty3.head != null) {
+                Node temp = priorty3.head;
+                if(askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1){
+                    System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
+                }
+                temp.myProcess.run();
+
+                if (temp.myProcess.burnTime == 0) {
+                    priorty3.pop();
+                    totalProcess--;
+                    System.out.println("Process" + temp.myProcess.processId + " sonlandı");
+                    askıdakiProcess.processId = -1;
+                }
+                else{
+                    askıdakiProcess = temp.myProcess;
+                }
+            }
 
             if(totalProcess == 0){
                 return;

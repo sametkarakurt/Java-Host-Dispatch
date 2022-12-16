@@ -2,12 +2,12 @@ package com.company;
 
 public class Node {
 
-    public Process process;
+    public MyProcess myProcess;
     public  Node next;
 
 
-    public Node(Process process) {
-        this.process = process;
+    public Node(MyProcess myProcess) {
+        this.myProcess = myProcess;
         this.next = null;
     }
 }

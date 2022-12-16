@@ -7,7 +7,7 @@ public class Queue {
       this.head = null;
    }
 
-   public void push(Process prcs){
+   public void push(MyProcess prcs){
       Node node = new Node(prcs);
       if(head == null){
          head = node;
@@ -24,10 +24,15 @@ public class Queue {
 
    }
 
-   public Process pop(){
+   public MyProcess pop(){
       Node popTemp = head;
-      head = head.next;
-      return popTemp.process;
+      if(head.next!= null){
+         head = head.next;
+      } else {
+         head = null;
+      }
+
+      return popTemp.myProcess;
    }
 
 }

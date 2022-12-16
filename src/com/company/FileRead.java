@@ -3,21 +3,21 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileRead {
-    public ArrayList<Process> readFile (String fileName) throws IOException{
+    public ArrayList<MyProcess> readFile (String fileName) throws IOException{
         File file = new File(fileName);
         FileReader fReader = new FileReader(file);
         String line;
         BufferedReader bReader = new BufferedReader(fReader);
-        ArrayList<Process> nodeArr = new ArrayList<Process>();
-
+        ArrayList<MyProcess> nodeArr = new ArrayList<MyProcess>();
+        int counterProcess = 0;
         while ((line=bReader.readLine()) != null){
             String[] arr = line.split(", ");
             int arrivalTime = Integer.parseInt(arr[0]);
             int priority = Integer.parseInt(arr[1]);
             int burnTime = Integer.parseInt(arr[2]);
-            System.out.println("2");
 
-            nodeArr.add(new Process(arrivalTime,priority,burnTime));
+
+            nodeArr.add(new MyProcess(counterProcess++,arrivalTime,priority,burnTime));
         }
         return nodeArr;
     }
