@@ -58,7 +58,7 @@ public class Main {
                     System.out.println("Process" + temp.myProcess.processId + " sonlandı");
                     askıdakiProcess.processId = -1;
                 }else{
-                    askıdakiProcess = temp.myProcess;
+                    askıdakiProcess = new MyProcess(temp.myProcess.processId,temp.myProcess.arrivalTime,temp.myProcess.priority,temp.myProcess.burnTime);
                 }
 
 
@@ -78,7 +78,8 @@ public class Main {
                     System.out.println("Process" + temp.myProcess.processId + " sonlandı");
                     askıdakiProcess.processId = -1;
                 }else{
-                    askıdakiProcess = temp.myProcess;
+                    askıdakiProcess = new MyProcess(temp.myProcess.processId,temp.myProcess.arrivalTime,temp.myProcess.priority,temp.myProcess.burnTime);
+
                 }
 
 
@@ -97,7 +98,7 @@ public class Main {
                     System.out.println("Process" + temp.myProcess.processId + " sonlandı");
                     askıdakiProcess.processId = -1;
                 }else{
-                    askıdakiProcess = temp.myProcess;
+                    askıdakiProcess = new MyProcess(temp.myProcess.processId,temp.myProcess.arrivalTime,temp.myProcess.priority,temp.myProcess.burnTime);
                 }
 
         }else if (priorty3.head != null) {
@@ -114,7 +115,7 @@ public class Main {
                     askıdakiProcess.processId = -1;
                 }
                 else{
-                    askıdakiProcess = temp.myProcess;
+                    askıdakiProcess = new MyProcess(temp.myProcess.processId,temp.myProcess.arrivalTime,temp.myProcess.priority,temp.myProcess.burnTime);
                 }
             }
 
