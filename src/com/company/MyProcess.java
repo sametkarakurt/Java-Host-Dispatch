@@ -9,6 +9,7 @@ public class MyProcess   {
     public int priority;
     public int burnTime;
     public int processId;
+    public int timeout;
 
 
     public MyProcess(int processId,int arrivalTime, int priority, int burnTime){
@@ -16,11 +17,12 @@ public class MyProcess   {
         this.priority = priority;
         this.burnTime = burnTime;
         this.processId = processId;
+        this.timeout=arrivalTime+20;
     }
     public void run() throws IOException {
 
-            ProcessBuilder pb = new ProcessBuilder("sleep","1000");
-            java.lang.Process p = pb.start();
+            ProcessBuilder pb = new ProcessBuilder("java","-version");
+            Process p = pb.start();
             p.destroy();
             burnTime--;
             if(burnTime >= 1){
