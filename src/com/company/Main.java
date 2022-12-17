@@ -40,15 +40,41 @@ public class Main {
                     }
                 }
             }
-            System.out.println("ZAMAN "+counter);
+            System.out.println("ZAMAN: "+counter);
+            //zamanasimi kontrolü
+            boolean zamanasimi=false;
+            if(realTime.head != null && realTime.head.myProcess.timeout<counter)
+            {
+                System.out.println("Prosess" + realTime.head.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + realTime.head.myProcess.priority);
+                realTime.pop();
+                totalProcess--;
+                zamanasimi=true;
+            }
+            if(priorty1.head != null &&  priorty1.head.myProcess.timeout<counter)
+            {
+                System.out.println("Prosess" + priorty1.head.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + priorty1.head.myProcess.priority);
+                priorty1.pop();
+                totalProcess--;
+                zamanasimi=true;
+            }
+            if(priorty2.head != null && priorty2.head.myProcess.timeout<counter)
+            {
+                System.out.println("Prosess" + priorty2.head.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + priorty2.head.myProcess.priority);
+                priorty2.pop();
+                totalProcess--;
+                zamanasimi=true;
+            }
+            if(priorty3.head != null &&priorty3.head.myProcess.timeout<counter)
+            {
+                System.out.println("Prosess" + priorty3.head.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + priorty3.head.myProcess.priority);
+                priorty3.pop();
+                totalProcess--;
+                zamanasimi=true;
+            }
+            if(zamanasimi==true)
+                continue;
             if (realTime.head != null) {
                 Node temp = realTime.head;
-
-                if (temp.myProcess.timeout < counter) {
-                    System.out.println("Prosess" + temp.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + temp.myProcess.priority);
-                    realTime.pop();
-                    totalProcess--;
-                } else {
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
                         System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
                     }
@@ -62,17 +88,10 @@ public class Main {
                     } else {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
                     }
-                }
 
 
             } else if (priorty1.head != null) {
-
                 Node temp = priorty1.head;
-                if (temp.myProcess.timeout < counter) {
-                    System.out.println("Prosess" + temp.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + temp.myProcess.priority);
-                    priorty1.pop();
-                    totalProcess--;
-                } else {
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
                         System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
                     }
@@ -88,16 +107,10 @@ public class Main {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
 
                     }
-                }
 
             } else if (priorty2.head != null) {
 
                 Node temp = priorty2.head;
-                if (temp.myProcess.timeout < counter) {
-                    System.out.println("Prosess" + temp.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + temp.myProcess.priority);
-                    priorty2.pop();
-                    totalProcess--;
-                } else {
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
                         System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
                     }
@@ -112,14 +125,9 @@ public class Main {
                     } else {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
                     }
-                }
+
             } else if (priorty3.head != null) {
                 Node temp = priorty3.head;
-                if (temp.myProcess.timeout < counter) {
-                    System.out.println("Prosess" + temp.myProcess.processId + " Zaman aşımına uğradı  Önceliği:" + temp.myProcess.priority);
-                    priorty3.pop();
-                    totalProcess--;
-                } else {
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
                         System.out.println("Process" + askıdakiProcess.processId + " askıya alındı");
                     }
@@ -135,7 +143,7 @@ public class Main {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
                     }
                 }
-            }
+
 
             if(totalProcess == 0){
                 return;
