@@ -26,7 +26,7 @@ public class MyProcess   {
             p.destroy();
             burnTime--;
             if(burnTime >= 1){
-                System.out.println("Process" + processId + " 1 saniye çalıştı "+ "Önceligi" +priority );
+                System.out.println("  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
             }
 
 
