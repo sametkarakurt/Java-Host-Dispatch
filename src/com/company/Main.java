@@ -40,33 +40,33 @@ public class Main {
                     }
                 }
             }
-            System.out.print(counter+" sn ");
+            //System.out.print(counter+" sn ");
             //zamanasimi kontrolü
             boolean zamanasimi=false;
             if(realTime.head != null && realTime.head.myProcess.timeout<counter)
             {
-                System.out.println("Process zaman aşımı  (id: " + realTime.head.myProcess.processId + " öncelik: " + realTime.head.myProcess.priority + " kalan süre: " + realTime.head.myProcess.burnTime +" sn)");
+                System.out.println(counter+ " sn"+" Process zaman aşımı  (id: " + realTime.head.myProcess.processId + " öncelik: " + realTime.head.myProcess.priority + " kalan süre: " + realTime.head.myProcess.burnTime +" sn)");
                 realTime.pop();
                 totalProcess--;
                 zamanasimi=true;
             }
             if(priorty1.head != null &&  priorty1.head.myProcess.timeout<counter)
             {
-                System.out.println("Process zaman aşımı  (id: " + priorty1.head.myProcess.processId + " öncelik: " + priorty1.head.myProcess.priority + " kalan süre: " + priorty1.head.myProcess.burnTime +" sn)");
+                System.out.println(counter+ " sn"+" Process zaman aşımı  (id: " + priorty1.head.myProcess.processId + " öncelik: " + priorty1.head.myProcess.priority + " kalan süre: " + priorty1.head.myProcess.burnTime +" sn)");
                 priorty1.pop();
                 totalProcess--;
                 zamanasimi=true;
             }
             if(priorty2.head != null && priorty2.head.myProcess.timeout<counter)
             {
-                System.out.println("Process zaman aşımı  (id: " + priorty2.head.myProcess.processId + " öncelik: " + priorty2.head.myProcess.priority + " kalan süre: " + priorty2.head.myProcess.burnTime +" sn)");
+                System.out.println(counter+ " sn"+" Process zaman aşımı  (id: " + priorty2.head.myProcess.processId + " öncelik: " + priorty2.head.myProcess.priority + " kalan süre: " + priorty2.head.myProcess.burnTime +" sn)");
                 priorty2.pop();
                 totalProcess--;
                 zamanasimi=true;
             }
             if(priorty3.head != null &&priorty3.head.myProcess.timeout<counter)
             {
-                System.out.println("Process zaman aşımı  (id: " + priorty3.head.myProcess.processId + " öncelik: " + priorty3.head.myProcess.priority + " kalan süre: " + priorty3.head.myProcess.burnTime +" sn)");
+                System.out.println(counter+ " sn"+" Process zaman aşımı  (id: " + priorty3.head.myProcess.processId + " öncelik: " + priorty3.head.myProcess.priority + " kalan süre: " + priorty3.head.myProcess.burnTime +" sn)");
                 priorty3.pop();
                 totalProcess--;
                 zamanasimi=true;
@@ -76,14 +76,14 @@ public class Main {
             if (realTime.head != null) {
                 Node temp = realTime.head;
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
-                        System.out.println("Process askıda  (id: " + askıdakiProcess.processId +" öncelik:" +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)" );
+                        System.out.println(counter+ " sn"+" Process askıda  (id: " + askıdakiProcess.processId +" öncelik:" +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)" );
                     }
 
-                    temp.myProcess.run();
+                    temp.myProcess.run(counter);
                     if (temp.myProcess.burnTime == 0) {
                         realTime.pop();
                         totalProcess--;
-                        System.out.println(" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority + " kalan süre: " + temp.myProcess.burnTime +" sn)" );
+                        System.out.println((counter+1)+" sn " +" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority + " kalan süre: " + temp.myProcess.burnTime +" sn)" );
                         askıdakiProcess.processId = -1;
                     } else {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -93,15 +93,15 @@ public class Main {
             } else if (priorty1.head != null) {
                 Node temp = priorty1.head;
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
-                        System.out.println("Process askıda  (id: " + askıdakiProcess.processId +" öncelik: " +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)");
+                        System.out.println(counter+ " sn"+" Process askıda  (id: " + askıdakiProcess.processId +" öncelik: " +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)");
                     }
-                    temp.myProcess.run();
+                    temp.myProcess.run(counter);
 
 
                     if (temp.myProcess.burnTime == 0) {
                         priorty1.pop();
                         totalProcess--;
-                        System.out.println(" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority + " kalan süre: " + temp.myProcess.burnTime + " sn)");
+                        System.out.println((counter+1)+" sn " +" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority + " kalan süre: " + temp.myProcess.burnTime + " sn)");
                         askıdakiProcess.processId = -1;
                     } else {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -112,15 +112,15 @@ public class Main {
 
                 Node temp = priorty2.head;
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
-                        System.out.println("Process askıda  (id: " + askıdakiProcess.processId +" öncelik: " +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)");
+                        System.out.println(counter+ " sn"+" Process askıda  (id: " + askıdakiProcess.processId +" öncelik: " +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)");
                     }
-                    temp.myProcess.run();
+                    temp.myProcess.run(counter);
 
 
                     if (temp.myProcess.burnTime == 0) {
                         priorty2.pop();
                         totalProcess--;
-                        System.out.println(" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " +temp.myProcess.priority + " kalan süre: " +temp.myProcess.burnTime +" sn)" );
+                        System.out.println((counter+1)+" sn " +" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " +temp.myProcess.priority + " kalan süre: " +temp.myProcess.burnTime +" sn)" );
                         askıdakiProcess.processId = -1;
                     } else {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -129,15 +129,15 @@ public class Main {
             } else if (priorty3.head != null) {
                 Node temp = priorty3.head;
                     if (askıdakiProcess.processId != temp.myProcess.processId && askıdakiProcess.processId != -1) {
-                        System.out.println("Process askıda  (id: " + askıdakiProcess.processId +" öncelik: " +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)");
+                        System.out.println(counter+ " sn"+" Process askıda  (id: " + askıdakiProcess.processId +" öncelik: " +askıdakiProcess.priority +" kalan süre: " + askıdakiProcess.burnTime + " sn)");
                     }
 
-                    temp.myProcess.run();
+                    temp.myProcess.run(counter);
 
                     if (temp.myProcess.burnTime == 0) {
                         priorty3.pop();
                         totalProcess--;
-                        System.out.println(" Process sonlandı id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority+ " kalan süre: "+ temp.myProcess.burnTime +" sn)");
+                        System.out.println((counter+1)+" sn " +" Process sonlandı id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority+ " kalan süre: "+ temp.myProcess.burnTime +" sn)");
                         askıdakiProcess.processId = -1;
                     } else {
                         askıdakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);

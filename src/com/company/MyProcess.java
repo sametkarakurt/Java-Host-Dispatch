@@ -10,6 +10,7 @@ public class MyProcess   {
     public int burnTime;
     public int processId;
     public int timeout;
+    public int remainingtime;
 
 
     public MyProcess(int processId,int arrivalTime, int priority, int burnTime){
@@ -18,16 +19,20 @@ public class MyProcess   {
         this.burnTime = burnTime;
         this.processId = processId;
         this.timeout=arrivalTime+20;
+        this.remainingtime = burnTime;
     }
-    public void run() throws IOException {
+    public void run(float counter) throws IOException {
 
             ProcessBuilder pb = new ProcessBuilder("java","-version");
             Process p = pb.start();
             p.destroy();
-            burnTime--;
-            if(burnTime >= 1){
-                System.out.println("  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+
+            if(remainingtime== burnTime){
+                System.out.println(counter+ " sn"+"  Process başladı (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+            }else if (burnTime>=1){
+                System.out.println(counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
             }
+             burnTime--;
 
 
 
