@@ -12,6 +12,12 @@ public class MyProcess   {
     public int timeout;
     public int remainingtime;
 
+    Colors color = new Colors();
+
+    public String colorForPrint;
+
+
+
 
     public MyProcess(int processId,int arrivalTime, int priority, int burnTime){
         this.arrivalTime = arrivalTime;
@@ -20,6 +26,8 @@ public class MyProcess   {
         this.processId = processId;
         this.timeout=arrivalTime+20;
         this.remainingtime = burnTime;
+        this.colorForPrint = (String) color.getAllColors().get(processId);
+
     }
     public void run(float counter) throws IOException {
 
@@ -27,10 +35,12 @@ public class MyProcess   {
             Process p = pb.start();
             p.destroy();
 
-            if(remainingtime== burnTime){
-                System.out.println(counter+ " sn"+"  Process başladı (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+
+
+        if(remainingtime== burnTime){
+                System.out.println(colorForPrint +counter+ " sn"+"  Process başladı (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
             }else if (burnTime>=1){
-                System.out.println(counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+                System.out.println(colorForPrint +counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
             }
              burnTime--;
 
