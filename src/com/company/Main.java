@@ -71,8 +71,6 @@ public class Main {
                 totalProcess--;
                 zamanasimi=true;
             }
-            if(zamanasimi==true)    //Zaman aşımına uğradıysa döngü devam eder
-                continue;
             if (realTime.head != null) { //Process askıda kontrol işlemlerinin yapıldığı yer (RealTime)
                 Node temp = realTime.head;
                     if (askidakiProcess.processId != temp.myProcess.processId && askidakiProcess.processId != -1) {
