@@ -29,20 +29,22 @@ public class MyProcess   {
         this.colorForPrint = (String) color.getAllColors().get(processId);
 
     }
-    public void run(float counter) throws IOException {
+    public void run(float counter) throws IOException, InterruptedException {
 
-            ProcessBuilder pb = new ProcessBuilder("java","-version");
-            Process p = pb.start();
-            p.destroy();
+        ProcessBuilder pb = new ProcessBuilder("sleep","1000");
+        Process p = pb.start();
+        p.destroy();
 
 
 
         if(remainingtime== burnTime){
                 System.out.println(colorForPrint +counter+ " sn"+"  Process başladı (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
-            }else if (burnTime>=1){
-                System.out.println(colorForPrint +counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
-            }
-             burnTime--;
+        }else if (burnTime>=1){
+            System.out.println(colorForPrint +counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+        }
+
+        Thread.sleep(1000);
+        burnTime--;
 
 
 

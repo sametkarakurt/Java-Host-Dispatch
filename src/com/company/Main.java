@@ -5,13 +5,13 @@ import java.util.Collections;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         FileRead fileRead = new FileRead();		//File read objesi oluşturuldu
         Queue realTime = new Queue();			//Processleri tutacağımız queuelar oluşturuldu
         Queue priorty1 = new Queue();
         Queue priorty2 = new Queue();
         Queue priorty3 = new Queue();
-        Colors color = new Colors();
+
 
         MyProcess askidakiProcess = new MyProcess(255,0,0,0);	//1 adet askıda process oluşturuldu
 
@@ -83,9 +83,11 @@ public class Main {
 
                     temp.myProcess.run(counter);
                     if (temp.myProcess.burnTime == 0) { //Process çalışma süresi bittiği zaman kuyruktan çıkarma işlemi
+
                         realTime.pop();
                         totalProcess--;
                         System.out.println(temp.myProcess.colorForPrint + (counter+1)+" sn " +" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority + " kalan süre: " + temp.myProcess.burnTime +" sn)" );
+
                         askidakiProcess.processId = 255;;
                     } else {
                         askidakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -95,6 +97,7 @@ public class Main {
             } else if (priorty1.head != null) { //Process askıda kontrol işlemlerinin yapıldığı yer (1st Priority)
                 Node temp = priorty1.head;
                     if (askidakiProcess.processId != temp.myProcess.processId && askidakiProcess.processId != 255) {
+
                         System.out.println(askidakiProcess.colorForPrint + counter+ " sn"+" Process askıda  (id: " + askidakiProcess.processId +" öncelik: " +askidakiProcess.priority +" kalan süre: " + askidakiProcess.burnTime + " sn)");
                     }
                     temp.myProcess.run(counter);
@@ -103,7 +106,9 @@ public class Main {
                     if (temp.myProcess.burnTime == 0) { //Process çalışma süresi bittiği zaman kuyruktan çıkarma işlemi
                         priorty1.pop();
                         totalProcess--;
+
                         System.out.println(temp.myProcess.colorForPrint +(counter+1)+" sn " +" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority + " kalan süre: " + temp.myProcess.burnTime + " sn)" );
+
                         askidakiProcess.processId = 255;
                     } else {
                         askidakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -122,7 +127,9 @@ public class Main {
                     if (temp.myProcess.burnTime == 0) { //Process çalışma süresi bittiği zaman kuyruktan çıkarma işlemi
                         priorty2.pop();
                         totalProcess--;
+
                         System.out.println(temp.myProcess.colorForPrint + (counter+1)+" sn " +" Process sonlandı (id: "+ temp.myProcess.processId + " öncelik: " +temp.myProcess.priority + " kalan süre: " +temp.myProcess.burnTime +" sn)" );
+
                         askidakiProcess.processId = 255;
                     } else {
                         askidakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -139,7 +146,9 @@ public class Main {
                     if (temp.myProcess.burnTime == 0) { //Process çalışma süresi bittiği zaman kuyruktan çıkarma işlemi
                         priorty3.pop();
                         totalProcess--;
+
                         System.out.println(temp.myProcess.colorForPrint +(counter+1)+" sn " +" Process sonlandı id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority+ " kalan süre: "+ temp.myProcess.burnTime +" sn)" );
+
                         askidakiProcess.processId = -1;
                     } else {
                         askidakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
@@ -150,6 +159,7 @@ public class Main {
             if(totalProcess == 0){ //Tüm processler bittiğinde işlem durur
                 return;
             }
+
             counter++; //Sayaç artımı
 
 
