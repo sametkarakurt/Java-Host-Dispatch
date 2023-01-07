@@ -43,7 +43,7 @@ public class MyProcess   {
             System.out.println(colorForPrint +counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
         }
 
-        Thread.sleep(1000);
+       
         burnTime--;
 
 

@@ -12,7 +12,7 @@ public class Main {
         Queue priorty2 = new Queue();
         Queue priorty3 = new Queue();
 
-
+        int timeOutProcessId = 255;
         MyProcess askidakiProcess = new MyProcess(255,0,0,0);	//1 adet askıda process oluşturuldu
 
         ArrayList<MyProcess> nodeArr = fileRead.readFile("src/Deneme.txt");	//Dosya okuma işlemi
@@ -45,39 +45,43 @@ public class Main {
 
             if(realTime.head != null && realTime.head.myProcess.timeout<counter)
             {//Process zamanı counterdan küçük ise process işleme devam eder (RealTime)
+            	timeOutProcessId = realTime.head.myProcess.processId;
                 System.out.println(realTime.head.myProcess.colorForPrint +counter+ " sn"+" Process zaman aşımı  (id: " + realTime.head.myProcess.processId + " öncelik: " + realTime.head.myProcess.priority + " kalan süre: " + realTime.head.myProcess.burnTime +" sn)" );
                 realTime.pop();
-                askidakiProcess.processId = 255;
+              
                 totalProcess--;
 
             }
             if(priorty1.head != null &&  priorty1.head.myProcess.timeout<counter)
             {//Process zamanı counterdan küçük ise process işleme devam eder (1st Priority)
+            	timeOutProcessId = priorty1.head.myProcess.processId;
                 System.out.println(priorty1.head.myProcess.colorForPrint  +counter+ " sn"+" Process zaman aşımı  (id: " + priorty1.head.myProcess.processId + " öncelik: " + priorty1.head.myProcess.priority + " kalan süre: " + priorty1.head.myProcess.burnTime +" sn)" );
                 priorty1.pop();
-                askidakiProcess.processId = 255;
+            
                 totalProcess--;
 
             }
             if(priorty2.head != null && priorty2.head.myProcess.timeout<counter)
             {//Process zamanı counterdan küçük ise process işleme devam eder (2nd Priority)
+               	timeOutProcessId = priorty2.head.myProcess.processId;
                 System.out.println(priorty2.head.myProcess.colorForPrint  +counter+ " sn"+" Process zaman aşımı  (id: " + priorty2.head.myProcess.processId + " öncelik: " + priorty2.head.myProcess.priority + " kalan süre: " + priorty2.head.myProcess.burnTime +" sn)" );
                 priorty2.pop();
-                askidakiProcess.processId = 255;
+             
                 totalProcess--;
 
             }
             if(priorty3.head != null &&priorty3.head.myProcess.timeout<counter)
             {//Process zamanı counterdan küçük ise process işleme devam eder (3rd Priority)
+               	timeOutProcessId = priorty3.head.myProcess.processId;
                 System.out.println(priorty3.head.myProcess.colorForPrint  +counter+ " sn"+" Process zaman aşımı  (id: " + priorty3.head.myProcess.processId + " öncelik: " + priorty3.head.myProcess.priority + " kalan süre: " + priorty3.head.myProcess.burnTime +" sn)" );
                 priorty3.pop();
-                askidakiProcess.processId = 255;
+       
                 totalProcess--;
 
             }
             if (realTime.head != null) { //Process askıda kontrol işlemlerinin yapıldığı yer (RealTime)
                 Node temp = realTime.head;
-                    if (askidakiProcess.processId != temp.myProcess.processId && askidakiProcess.processId != 255) {
+                    if (askidakiProcess.processId != temp.myProcess.processId && timeOutProcessId != askidakiProcess.processId  && askidakiProcess.processId != 255) {
                         System.out.println(askidakiProcess.colorForPrint +counter+ " sn"+" Process askıda  (id: " + askidakiProcess.processId +" öncelik:" +askidakiProcess.priority +" kalan süre: " + askidakiProcess.burnTime + " sn)");
                     }
 
@@ -96,7 +100,7 @@ public class Main {
 
             } else if (priorty1.head != null) { //Process askıda kontrol işlemlerinin yapıldığı yer (1st Priority)
                 Node temp = priorty1.head;
-                    if (askidakiProcess.processId != temp.myProcess.processId && askidakiProcess.processId != 255) {
+                    if (askidakiProcess.processId != temp.myProcess.processId &&  timeOutProcessId != askidakiProcess.processId && askidakiProcess.processId != 255) {
 
                         System.out.println(askidakiProcess.colorForPrint + counter+ " sn"+" Process askıda  (id: " + askidakiProcess.processId +" öncelik: " +askidakiProcess.priority +" kalan süre: " + askidakiProcess.burnTime + " sn)");
                     }
@@ -118,7 +122,7 @@ public class Main {
             } else if (priorty2.head != null) { //Process askıda kontrol işlemlerinin yapıldığı yer (2nd Priority)
 
                 Node temp = priorty2.head;
-                    if (askidakiProcess.processId != temp.myProcess.processId && askidakiProcess.processId != 255) {
+                    if (askidakiProcess.processId != temp.myProcess.processId && timeOutProcessId != askidakiProcess.processId && askidakiProcess.processId != 255) {
                         System.out.println(askidakiProcess.colorForPrint +counter+ " sn"+" Process askıda  (id: " + askidakiProcess.processId +" öncelik: " +askidakiProcess.priority +" kalan süre: " + askidakiProcess.burnTime + " sn)" );
                     }
                     temp.myProcess.run(counter);
@@ -137,7 +141,7 @@ public class Main {
 
             } else if (priorty3.head != null) { //Process askıda kontrol işlemlerinin yapıldığı yer (3rd Priority)
                 Node temp = priorty3.head;
-                    if (askidakiProcess.processId != temp.myProcess.processId && askidakiProcess.processId != 255) {
+                    if (askidakiProcess.processId != temp.myProcess.processId && timeOutProcessId != askidakiProcess.processId && askidakiProcess.processId != 255) {
                         System.out.println(askidakiProcess.colorForPrint +counter+ " sn"+" Process askıda  (id: " + askidakiProcess.processId +" öncelik: " +askidakiProcess.priority +" kalan süre: " + askidakiProcess.burnTime + " sn)" );
                     }
 
@@ -149,7 +153,7 @@ public class Main {
 
                         System.out.println(temp.myProcess.colorForPrint +(counter+1)+" sn " +" Process sonlandı id: "+ temp.myProcess.processId + " öncelik: " + temp.myProcess.priority+ " kalan süre: "+ temp.myProcess.burnTime +" sn)" );
 
-                        askidakiProcess.processId = -1;
+                        askidakiProcess.processId = 255;
                     } else {
                         askidakiProcess = new MyProcess(temp.myProcess.processId, temp.myProcess.arrivalTime, temp.myProcess.priority, temp.myProcess.burnTime);
                     }
