@@ -31,19 +31,19 @@ public class MyProcess   {
     }
     public void run(float counter) throws IOException, InterruptedException {
 
-        ProcessBuilder pb = new ProcessBuilder("sleep","1000");
+        ProcessBuilder pb = new ProcessBuilder("java", "-version");
         Process p = pb.start();
         p.destroy();
-
+        
 
 
         if(remainingtime== burnTime){
-                System.out.println(colorForPrint +counter+ " sn"+"  Process başladı (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+                System.out.println(colorForPrint +counter+ " sn"+"  Process basladi (id: " + processId + " oncelik: " + priority + " kalan sure: " + burnTime + " sn)" );
         }else if (burnTime>=1){
-            System.out.println(colorForPrint +counter+ " sn"+"  Process yürütülüyor (id: " + processId + " öncelik: " + priority + " kalan süre: " + burnTime + " sn)" );
+            System.out.println(colorForPrint +counter+ " sn"+"  Process yurutuluyor (id: " + processId + " oncelik: " + priority + " kalan sure: " + burnTime + " sn)" );
         }
 
-       
+       Thread.sleep(1000);
         burnTime--;
 
 
